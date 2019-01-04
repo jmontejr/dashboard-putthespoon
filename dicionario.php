@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>Put The Spoon</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -33,69 +33,44 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+    <!-- <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-4.jpg"> -->
+    <div class="sidebar" data-color="blue">
 
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+        <!--
 
+            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+            Tip 2: you can also add an image using data-image tag
 
-    	<div class="sidebar-wrapper">
+        -->
+
+        <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Put the spoon
+                <a href="index.php" class="simple-text">
+                    Put The Spoon
                 </a>
             </div>
 
             <ul class="nav">
-                <li>
-                    <a href="dashboard.html">
+                <li class="active">
+                    <a href="index.php">
                         <i class="pe-7s-graph"></i>
                         <p>Painel</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="table.html">
-                        <i class="pe-7s-note2"></i>
-                        <p>Table List</p>
-                    </a>
-                </li> -->
-                <li class="active">
-                    <a href="typography.html">
+                <li>
+                    <a href="dicionario.php">
                         <i class="pe-7s-news-paper"></i>
-                        <p>Dicionario</p>
+                        <p>Dicionário</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="quem-somos.php">
                         <i class="pe-7s-user"></i>
-                        <p>Quem somos</p>
+                        <p>Quem Somos</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li> -->
             </ul>
-    	</div>
+        </div>
     </div>
 
     <div class="main-panel">

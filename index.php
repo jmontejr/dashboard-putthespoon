@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Light Bootstrap Dashboard by Creative Tim</title>
+    <title>Put The Spoon</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -36,72 +36,42 @@
 <body>
 
     <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+        <!-- <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-4.jpg"> -->
+        <div class="sidebar" data-color="blue">
 
             <!--
 
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
+                Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+                Tip 2: you can also add an image using data-image tag
 
-    -->
+            -->
 
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
+                    <a href="index.php" class="simple-text">
                         Put The Spoon
                     </a>
                 </div>
 
                 <ul class="nav">
                     <li class="active">
-                        <a href="dashboard.html">
+                        <a href="index.php">
                             <i class="pe-7s-graph"></i>
                             <p>Painel</p>
                         </a>
                     </li>
                     <li>
-                        <a href="typography.html">
+                        <a href="dicionario.php">
                             <i class="pe-7s-news-paper"></i>
                             <p>Dicionário</p>
                         </a>
                     </li>
                     <li>
-                        <a href="user.html">
+                        <a href="quem-somos.php">
                             <i class="pe-7s-user"></i>
                             <p>Quem Somos</p>
                         </a>
                     </li>
-                    <!-- <li>
-                        <a href="table.html">
-                            <i class="pe-7s-note2"></i>
-                            <p>table list</p>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="icons.html">
-                            <i class="pe-7s-science"></i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="maps.html">
-                            <i class="pe-7s-map-marker"></i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="notifications.html">
-                            <i class="pe-7s-bell"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
-                    <li class="active-pro">
-                        <a href="upgrade.html">
-                            <i class="pe-7s-rocket"></i>
-                            <p>Upgrade to PRO</p>
-                        </a>
-                    </li> -->
                 </ul>
             </div>
         </div>
@@ -117,93 +87,6 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="#">Painel</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <!-- <ul class="nav navbar-nav navbar-left">
-                            <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-dashboard"></i>
-                                    <p class="hidden-lg hidden-md">Dashboard</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-lg hidden-md"></b>
-                                    <p class="hidden-lg hidden-md">
-                                        5 Notifications
-                                        <b class="caret"></b>
-                                    </p>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#">Notification 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Notification 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Notification 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Notification 4</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Another notification</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-search"></i>
-                                    <p class="hidden-lg hidden-md">Search</p>
-                                </a>
-                            </li>
-                        </ul> -->
-
-                        <!-- <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="">
-                                    <p>Account</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-                                        Dropdown
-                                        <b class="caret"></b>
-                                    </p>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#">Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Something</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Something</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">Separated link</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <p>Log out</p>
-                                </a>
-                            </li>
-                            <li class="separator hidden-lg"></li>
-                        </ul> -->
                     </div>
                 </div>
             </nav>
