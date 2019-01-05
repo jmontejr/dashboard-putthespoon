@@ -696,6 +696,21 @@ fieldset[disabled] .btn-success.active {
     border-top-color: #87CB16;
 }
 
+#btn-main-screen{
+    background-color: #9368E9!important;
+    border-color: #9368E9!important;
+}
+
+#btn-main-screen:hover{
+    background-color: #943bea!important;
+    border-color: #943bea!important;
+}
+
+#btn-main-screen:active{
+    background-color: #943bea!important;
+    border-color: #943bea!important;
+}
+
 .btn-info {
     border-color: #1DC7EA;
     color: #1DC7EA;
