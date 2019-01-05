@@ -61,15 +61,21 @@
                         </a>
                     </li>
                     <li>
-                        <a href="dicionario.html">
+                        <a href="glossario.html">
                             <i class="pe-7s-news-paper"></i>
-                            <p>Dicionário</p>
+                            <p>Glossário</p>
                         </a>
                     </li>
                     <li>
                         <a href="quem-somos.html">
                             <i class="pe-7s-user"></i>
                             <p>Quem Somos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ProjetosDeBD-2018-2/put-the-spoon" target="_blank">
+                            <i class="fa fa-github"></i>
+                            <p>Github</p>
                         </a>
                     </li>
                 </ul>
@@ -105,30 +111,29 @@
                                 </div>
                                 <div class="content">
                                     
-                                    <form method="" action="">
-                                        <div class="row text-center" style="display:flex">
-                                            <div class="col-md-5" style="margin-left:auto;margin-right:auto">
-                                                <div class="form-group">
-                                                    <!-- <label>Selecione sua consulta:</label> -->
-                                                    <select class="form-control" class="form-control" id="" name="" required>
-                                                        <option selected disabled hidden value="">-- SELECIONE A CONSULTA AQUI E META A COLHER! --</option>
-                                                        <option id="" value="">query 1</option>
-                                                        <option id="" value="">query 2</option>
-                                                        <option id="" value="">query 3</option>
-                                                        <option id="" value="">query 4</option>
-                                                        <option id="" value="">query 5</option>
-                                                    </select>
-                                                </div>
+                                    <div class="row text-center" style="display:flex">
+                                        <div class="col-md-5" style="margin-left:auto;margin-right:auto">
+                                            <div class="form-group">
+                                                <!-- <label>Selecione sua consulta:</label> -->
+                                                <select class="form-control" class="form-control" id="escolha-consulta" required>
+                                                    <option selected disabled hidden>-- SELECIONE A CONSULTA AQUI E META A COLHER! --</option>
+                                                    <option id="1" value="1">Notas e Despesas de uma determinada IES</option>
+                                                    <option id="2" value="2">Médias das notas das IES por Região</option>
+                                                    <option id="3" value="3">Regiões que possuem as maiores Despesas com IES</option>
+                                                    <option id="4" value="4">IES que possuem gastos Superiores e Inferiores ao Orçamento</option>
+                                                    <option id="5" value="5">IES com maiores Despesas (por tipo de despesa)</option>
+                                                    <option id="6" value="6">Relação Despesas x Notas das IES</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    
-                                        <div class="row text-center">
-                                            <div class="col-md-12">
-                                                <button type="submit" id="btn-main-screen" class="btn btn-info btn-fill">CONSULTAR</button>
-                                            </div>
+                                    </div>
+                                
+                                    <div class="row text-center">
+                                        <div class="col-md-12">
+                                            <button data-backdrop="false" type="button" id="btn-main-screen" class="btn btn-purple btn-fill" data-toggle="modal">CONSULTAR</button>
                                         </div>
-                                        <div class="clearfix"></div>
-                                    </form>
+                                    </div>
+                                    <div class="clearfix"></div>
 
                                     <div class="footer">
 
@@ -138,9 +143,144 @@
                         </div>
                     </div>
 
+                    <!-- ==================== Início Modais ==================== -->
+
+                    <!-- Modal Consulta 1 -->
+                    <div class="modal fade" id="consulta1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <form action="consultas/consulta1.html" method="">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Consulta 1</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Consulta 1
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dangerous" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-purple">Consultar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ./Modal Consulta 1 -->
+
+                    <!-- Modal Consulta 2 -->
+                    <div class="modal fade" id="consulta2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <form action="consultas/consulta2.html" method="">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Consulta 2</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Consulta 2
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dangerous" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-purple">Consultar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ./Modal Consulta 2 -->
+
+                    <!-- Modal Consulta 3 -->
+                    <div class="modal fade" id="consulta3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <form action="consultas/consulta3.html" method="">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Consulta 3</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Consulta 3
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dangerous" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-purple">Consultar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ./Modal Consulta 3 -->
+
+                    <!-- Modal Consulta 4 -->
+                    <div class="modal fade" id="consulta4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <form action="consultas/consulta4.html" method="">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Consulta 4</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Consulta 4
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dangerous" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-purple">Consultar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ./Modal Consulta 4 -->
+
+                    <!-- Modal Consulta 5 -->
+                    <div class="modal fade" id="consulta5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <form action="consultas/consulta5.html" method="">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Consulta 5</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Consulta 5
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dangerous" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-purple">Consultar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ./Modal Consulta 5 -->
+
+                    <!-- Modal Consulta 6 -->
+                    <div class="modal fade" id="consulta6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <form action="consultas/consulta6.html" method="">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Consulta 6</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Consulta 6
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dangerous" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-purple">Consultar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ./Modal Consulta 6 -->
+
+                    <!-- ==================== Final Modais ==================== -->
+
                 </div>
             </div>
-
 
             <footer class="footer">
                 <div class="container-fluid">
@@ -184,16 +324,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        // demo.initChartist();
-
-        /* $.notify({
-            icon: 'pe-7s-gift',
-            message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-        }, {
-                type: 'info',
-                timer: 4000
-            }); */
+        // $("#btn-main-screen").click(function() {});
+        $("#escolha-consulta").change(function () {
+            $("select option:selected").each(function () {
+                var numero = $(this).val();
+                $("#btn-main-screen").attr("data-target", "#consulta" + numero);
+            });
+        });
 
     });
 </script>

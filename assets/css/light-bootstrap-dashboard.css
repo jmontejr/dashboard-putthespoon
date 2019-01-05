@@ -695,18 +695,31 @@ fieldset[disabled] .btn-success.active {
 .btn-success .caret {
     border-top-color: #87CB16;
 }
-
-#btn-main-screen{
+.btn-dangerous{
+    background-color: rgb(243, 36, 50)!important;
+    border-color: rgb(243, 36, 50)!important;
+    color: #ffffff!important;
+}
+.btn-dangerous:hover{
+    background-color: #FF4A55!important;
+    border-color: #FF4A55!important;
+}
+.btn-dangerous:active{
+    background-color: #FF4A55!important;
+    border-color: #FF4A55!important;
+}
+.btn-purple{
     background-color: #9368E9!important;
     border-color: #9368E9!important;
+    color: #ffffff!important;
 }
 
-#btn-main-screen:hover{
+.btn-purple:hover{
     background-color: #943bea!important;
     border-color: #943bea!important;
 }
 
-#btn-main-screen:active{
+.btn-purple:active{
     background-color: #943bea!important;
     border-color: #943bea!important;
 }
