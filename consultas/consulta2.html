@@ -122,8 +122,12 @@
                                 </div>
                                 <div class="content">
                                     
-                                    <div class="lead"><p><strong>Nome:</strong> Norte</p></div>
-                                    <div class="lead"><p><strong>Nota:</strong> 3.xxxxx</p></div>
+                                    <div class="lead">
+                                        <p><strong>Nome: </strong><span id="menorlabel"></span></p>
+                                    </div>
+                                    <div class="lead">
+                                        <p><strong>Nota: </strong><span id="menorvalor"></span></p>
+                                    </div>
 
                                 </div>
                             </div>
@@ -138,8 +142,12 @@
                                 </div>
                                 <div class="content">
 
-                                    <div class="lead"><p><strong>Nome:</strong> Nordeste</p></div>
-                                    <div class="lead"><p><strong>Nota:</strong> 4.xxxxx</p></div>
+                                    <div class="lead">
+                                        <p><strong>Nome: </strong><span id="maiorlabel"></span></p>
+                                    </div>
+                                    <div class="lead">
+                                        <p><strong>Nota: </strong><span id="maiorvalor"></span></p>
+                                    </div>
 
                                 </div>
                             </div>
@@ -208,47 +216,98 @@
 <script src="../assets/js/demo.js"></script>
 
 <!-- Call GET Method API Put The Spoon -->
-<script src="../assets/js/consultas.js"></script>
+<!-- <script src="../assets/js/consultas.js"></script> -->
 
 <script type="text/javascript">
     
     $(document).ready(function () {
 
-        Consultas.requestGet("/Notas/AverageByRegion", $_GET.consulta2Ano);
-        
-        // demo.initChartist();
+        // Consultas.requestGet("/Notas/AverageByRegion", $_GET.consulta2Ano);
 
-        var labels_regiao = [];
-        var series_regiao = [];
-        array.forEach(element => {
-            labels_regiao.push(element.regiaoIes);
-            series_regiao.push(element.nota);
-        });
-        var data = {
-            labels: labels_regiao,
-            series: series_regiao
-        };
-
-        var options = {
-            seriesBarDistance: 1,
-            axisX: {
-                showGrid: false
+        $.ajax({
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': 'true'
             },
-            height: "245px"
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            url: "https://putthespoon-api.herokuapp.com/api/1/Notas/AverageByRegion/"+ $_GET.consulta2Ano,
+            success: function (data) {
+                criarGrafico(data);
+            },
+            error: function (e) {
+                console.log("Error: ", e);
+            }
+        });
+
+        function  criarGrafico(dados){
+            
+            var labels_regiao = [];
+            var series_regiao = [];
+
+            dados.forEach(element => {
+                labels_regiao.push(element.regiaoIes);
+                series_regiao.push(element.nota);
+            });
+
+            var min = Math.min.apply(Math, series_regiao);
+            var max = Math.max.apply(Math, series_regiao);
+            var label_max;
+            var label_min;
+
+            dados.forEach(elem => {
+                if (elem.nota == max) {
+                    label_max = elem.regiaoIes;
+                }
+                if (elem.nota == min) {
+                    label_min = elem.regiaoIes;
+                }
+            });
+
+            $("#maiorlabel").html(label_max);
+            $("#menorlabel").html(label_min);
+            //Duas casas decimais (porem arredonda pra cima)
+            /* $("#maiorvalor").html(parseFloat(max.toFixed(2)));
+            $("#menorvalor").html(parseFloat(min.toFixed(2))); */
+
+            // Nao arredonda
+            $("#maiorvalor").html(max);
+            $("#menorvalor").html(min);
+            
+            var data = {
+                labels: labels_regiao,
+                series: [series_regiao]
+            };
+
+            var options = {
+                seriesBarDistance: 1,
+                axisX: {
+                    showGrid: false
+                },
+                height: "245px"
+            };
+
+            var responsiveOptions = [
+                ['screen and (max-width: 640px)', {
+                    seriesBarDistance: 10,
+                    axisX: {
+                        labelInterpolationFnc: function (value) {
+                            return value[0];
+                        }
+                    }
+                }]
+            ];
+
+            Chartist.Line('#chartActivity', data, options, responsiveOptions);
         };
 
-        var responsiveOptions = [
-            ['screen and (max-width: 640px)', {
-                seriesBarDistance: 10,
-                axisX: {
-                    labelInterpolationFnc: function (value) {
-                        return value[0];
-                    }
-                }
-            }]
-        ];
-
-        Chartist.Bar('#chartActivity', data, options, responsiveOptions);
+        function procurarporChave(obj, value) {
+            return Object.keys(obj).filter(function (key) {
+                return obj[key] == value;
+            })
+        }
 
     });
     
