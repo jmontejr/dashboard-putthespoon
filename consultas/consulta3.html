@@ -159,7 +159,7 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="header">
-                                            <h4 class="title">Despesa das IES em <script> document.write($_GET.consulta3Ano)</script></h4>
+                                            <h4 class="title">Despesa das IES em <script> document.write($_GET.consulta3Ano)</script>¹</h4>
                                             <p class="category">
                                                 Gráfico com despesa de IES por região.
                                             </p>
@@ -169,15 +169,18 @@
                                             <div id="chartActivity" class="ct-chart"></div>
         
                                         </div>
+                                        <div class="scaleDespesa">
+                                            <p>¹ A escala do gráfico é de 100.000</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-        
                         </div>
             </div>
 
             <footer class="footer">
                 <div class="container-fluid">
+                   
                     <p class="copyright pull-right">
                         &copy;
                         <script>document.write(new Date().getFullYear())</script>
@@ -242,12 +245,19 @@
             
             var labels_regiao_despesa = [];
             var series_regiao_despesa = [];
+            var graphic_value = []; 
+
+
+            var valor_escala = 100000;
+
 
             dados.forEach(element => {
                 labels_regiao_despesa.push(element.regiaoIes);
                 series_regiao_despesa.push(element.despesa);
-            });
+                graphic_value.push(element.despesa/valor_escala);
 
+            });
+            console.log(graphic_value);
             var min = Math.min.apply(Math, series_regiao_despesa);
             var max = Math.max.apply(Math, series_regiao_despesa);
             var label_max;
@@ -264,6 +274,8 @@
 
             $("#maiorLabelDespesa").html(label_max);
             $("#menorLabelDespesa").html(label_min);
+
+
             //Duas casas decimais (porem arredonda pra cima)
             /* $("#maiorvalor").html(parseFloat(max.toFixed(2)));
             $("#menorvalor").html(parseFloat(min.toFixed(2))); */
@@ -274,9 +286,8 @@
             
             var data = {
                 labels: labels_regiao_despesa,
-                series: [series_regiao_despesa]
+                series: [graphic_value]
             };
-            console.log(data);
             var options = {
                 seriesBarDistance: 1,
                 axisX: {

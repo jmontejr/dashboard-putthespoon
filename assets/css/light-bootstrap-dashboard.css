@@ -1044,6 +1044,11 @@ fieldset[disabled] .btn-neutral.active {
     outline: 0 !important;
     color: #333333;
 }
+.scaleDespesa{
+    color: gray;
+    text-align: right;
+    padding-right: 15px;
+}
 
 .has-success .form-control,
 .has-error .form-control,
