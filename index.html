@@ -410,7 +410,7 @@
 <script src="assets/js/bootstrap-notify.js"></script>
 
 <!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
@@ -421,14 +421,42 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        // $("#btn-main-screen").click(function() {});
+        // Change Select Modal data-target
         $("#escolha-consulta").change(function () {
             $("#escolha-consulta option:selected").each(function () {
                 var numero = $(this).val();
                 $("#btn-main-screen").attr("data-target", "#consulta" + numero);
             });
         });
+        
+        // Request from PutTheSpoon API Rest - Get getAll Ies 
+        $.ajax({
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': 'true'
+            },
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            url: "https://putthespoon-api.herokuapp.com/api/1/Ies/getAll",
+            data: {},
+            success: function (data) {
+                selectDinamico(data);
+                console.log("Success on call get method from putthespoon-api on url: https://putthespoon-api.herokuapp.com/api/1/Ies/getAll");
+            },
+            error: function (e) {
+                console.log("Error: ", e);
+            }
+        });
 
+        // Fuction Loop to select search one Ies 
+        function selectDinamico(dado) {
+            dado.forEach(element => {
+                $("#consulta1Ies").append($('<option>', { value: element.sigla_ies, text: element.nome_ies, id: element.cod_ies })); 
+            });
+        }
+        
     });
 </script>
 
