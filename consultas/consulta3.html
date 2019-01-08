@@ -32,15 +32,15 @@
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
     <script>
-    
-            var parts = window.location.search.substr(1).split("&");
-            var $_GET = {};
-            for (var i = 0; i < parts.length; i++) {
-                var temp = parts[i].split("=");
-                $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
-            }
-    
-        </script>
+
+        var parts = window.location.search.substr(1).split("&");
+        var $_GET = {};
+        for (var i = 0; i < parts.length; i++) {
+            var temp = parts[i].split("=");
+            $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+        }
+
+    </script>
 
 </head>
 
@@ -103,87 +103,106 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../index.html">Despesa por Região - <script> document.write($_GET.consulta3Ano) </script></a>
+                        <a class="navbar-brand" href="../index.html">Despesa por Região -
+                            <script> document.write($_GET.consulta3Ano) </script>
+                        </a>
                     </div>
                 </div>
             </nav>
 
 
             <div class="content">
-                    <div class="container-fluid">
-                            <div class="row">
-                                
-                                <div class="col-md-6">
-                                    <div class="card">
-        
-                                        <div class="header">
-                                            <h4 class="title">Menor despesa</h4>
-                                            <p class="category">Região que apresentou menor despesa com IES</p>
-                                        </div>
-                                        <div class="content">
-                                            
-                                            <div class="lead">
-                                                <p><strong>Nome: </strong><span id="menorLabelDespesa"></span></p>
-                                            </div>
-                                            <div class="lead">
-                                                <p><strong>Valor: </strong>R$ <span id="menorValorDespesa"></span></p>
-                                            </div>
-        
-                                        </div>
-                                    </div>
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="card">
+
+                                <div class="header">
+                                    <h4 class="title">Menor despesa</h4>
+                                    <p class="category">Região que apresentou menor despesa com IES</p>
                                 </div>
-        
-                                <div class="col-md-6">
-                                    <div class="card">
-        
-                                        <div class="header">
-                                            <h4 class="title">Maior despesa</h4>
-                                            <p class="category">Região que apresentou maior despesa com IES</p>
-                                        </div>
-                                        <div class="content">
-        
-                                            <div class="lead">
-                                                <p><strong>Nome: </strong><span id="maiorLabelDespesa"></span></p>
-                                            </div>
-                                            <div class="lead">
-                                                <p><strong>Valor: </strong> R$ <span id="maiorValorDespesa"></span></p>
-                                            </div>
-        
-                                        </div>
+                                <div class="content">
+
+                                    <div class="lead">
+                                        <p>
+                                            <strong>Nome: </strong>
+                                            <span id="menorLabelDespesa"></span>
+                                        </p>
                                     </div>
-                                </div>
-        
-                            </div>
-        
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="header">
-                                            <h4 class="title">Despesa das IES em <script> document.write($_GET.consulta3Ano)</script></h4>
-                                            <p class="category">
-                                                Gráfico com despesa de IES por região.
-                                            </p>
-                                        </div>
-                                        <div class="content">
-        
-                                            <div id="chartActivity" class="ct-chart"></div>
-        
-                                        </div>
+                                    <div class="lead">
+                                        <p>
+                                            <strong>Valor: </strong>R$
+                                            <span id="menorValorDespesa"></span>
+                                        </p>
                                     </div>
+
                                 </div>
                             </div>
-        
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+
+                                <div class="header">
+                                    <h4 class="title">Maior despesa</h4>
+                                    <p class="category">Região que apresentou maior despesa com IES</p>
+                                </div>
+                                <div class="content">
+
+                                    <div class="lead">
+                                        <p>
+                                            <strong>Nome: </strong>
+                                            <span id="maiorLabelDespesa"></span>
+                                        </p>
+                                    </div>
+                                    <div class="lead">
+                                        <p>
+                                            <strong>Valor: </strong> R$
+                                            <span id="maiorValorDespesa"></span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Despesa das IES em
+                                        <script> document.write($_GET.consulta3Ano)</script>¹</h4>
+                                    <p class="category">
+                                        Gráfico com despesa de IES por região.
+                                    </p>
+                                </div>
+                                <div class="content">
+
+                                    <div id="chartActivity" class="ct-chart"></div>
+
+                                </div>
+                                <footer class="footer">
+                                    <div class="container-fluid">
+                                        <div class="ct-label ct-horizontal ct-end">
+                                            <p>¹ A escala do gráfico é de 100.000 reais</p>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <footer class="footer">
                 <div class="container-fluid">
+
                     <p class="copyright pull-right">
                         &copy;
-                        <script>document.write(new Date().getFullYear())</script>
-                        Put The Spoon - todos os direitos reservados |
-                        Modelo de
-                        &copy;
+                        <script>document.write(new Date().getFullYear())</script> Put The Spoon - todos os direitos reservados | Modelo de &copy;
                         <script>document.write(new Date().getFullYear())</script>
                         <a href="http://www.creative-tim.com">Creative Tim</a>
                     </p>
@@ -229,7 +248,7 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             crossDomain: true,
-            url: "https://putthespoon-api.herokuapp.com/api/1/Despesa/ExpensesByRegions/"+ $_GET.consulta3Ano,
+            url: "https://putthespoon-api.herokuapp.com/api/1/Despesa/ExpensesByRegions/" + $_GET.consulta3Ano,
             success: function (data) {
                 criarGrafico(data);
             },
@@ -238,16 +257,29 @@
             }
         });
 
-        function  criarGrafico(dados){
-            
+        function criarGrafico(dados) {
+
             var labels_regiao_despesa = [];
             var series_regiao_despesa = [];
+            var graphic_value = [];
+
+
+            var valor_escala = 100000;
+
 
             dados.forEach(element => {
                 labels_regiao_despesa.push(element.regiaoIes);
                 series_regiao_despesa.push(element.despesa);
+
+
             });
 
+            dados.forEach(element => {
+                graphic_value.push(element.despesa / valor_escala);
+
+            });
+
+            console.log(graphic_value);
             var min = Math.min.apply(Math, series_regiao_despesa);
             var max = Math.max.apply(Math, series_regiao_despesa);
             var label_max;
@@ -264,6 +296,8 @@
 
             $("#maiorLabelDespesa").html(label_max);
             $("#menorLabelDespesa").html(label_min);
+
+
             //Duas casas decimais (porem arredonda pra cima)
             /* $("#maiorvalor").html(parseFloat(max.toFixed(2)));
             $("#menorvalor").html(parseFloat(min.toFixed(2))); */
@@ -271,12 +305,11 @@
             // Nao arredonda
             $("#maiorValorDespesa").html(max);
             $("#menorValorDespesa").html(min);
-            
+
             var data = {
                 labels: labels_regiao_despesa,
-                series: [series_regiao_despesa]
+                series: [graphic_value]
             };
-            console.log(data);
             var options = {
                 seriesBarDistance: 1,
                 axisX: {
