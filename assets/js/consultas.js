@@ -31,7 +31,6 @@ Consultas = {
             contentType: "application/json; charset=utf-8",
             crossDomain: true,
             url: Consultas.getUrl(url, arg1, arg2, arg3),
-            data: {},
             success: function (data) {
                 console.log(data);
             },
@@ -39,6 +38,6 @@ Consultas = {
                 console.log("Error: ", e);
             }
         });
-    }
+    },
 
 };

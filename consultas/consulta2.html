@@ -31,6 +31,17 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+    <script>
+    
+        var parts = window.location.search.substr(1).split("&");
+        var $_GET = {};
+        for (var i = 0; i < parts.length; i++) {
+            var temp = parts[i].split("=");
+            $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -92,7 +103,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../index.html">Painel</a>
+                        <a class="navbar-brand" href="../index.html">Notas por Região - <script> document.write($_GET.consulta2Ano) </script></a>
                     </div>
                 </div>
             </nav>
@@ -101,50 +112,54 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
+                        
+                        <div class="col-md-6">
                             <div class="card">
 
                                 <div class="header">
-                                    <h4 class="title">Email Statistics</h4>
-                                    <p class="category">Last Campaign Performance</p>
+                                    <h4 class="title">Menor nota</h4>
+                                    <p class="category">Região que apresentou menor média de notas</p>
                                 </div>
                                 <div class="content">
-                                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                    
+                                    <div class="lead"><p><strong>Nome:</strong> Norte</p></div>
+                                    <div class="lead"><p><strong>Nota:</strong> 3.xxxxx</p></div>
 
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Open
-                                            <i class="fa fa-circle text-danger"></i> Bounce
-                                            <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                        </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="card">
+
                                 <div class="header">
-                                    <h4 class="title">Users Behavior</h4>
-                                    <p class="category">24 Hours performance</p>
+                                    <h4 class="title">Maior nota</h4>
+                                    <p class="category">Região que apresentou maior média de notas</p>
                                 </div>
                                 <div class="content">
+
+                                    <div class="lead"><p><strong>Nome:</strong> Nordeste</p></div>
+                                    <div class="lead"><p><strong>Nota:</strong> 4.xxxxx</p></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Notas das regiões em <script> document.write($_GET.consulta2Ano)</script></h4>
+                                    <p class="category">
+                                        Gráfico com comparativo das médias das notas das regiões.
+                                    </p>
+                                </div>
+                                <div class="content">
+
                                     <div id="chartActivity" class="ct-chart"></div>
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Open
-                                            <i class="fa fa-circle text-danger"></i> Click
-                                            <i class="fa fa-circle text-warning"></i> Click Second Time
-                                        </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-history"></i> Updated 3 minutes ago
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -181,7 +196,7 @@
 <script src="../assets/js/chartist.min.js"></script>
 
 <!--  Notifications Plugin    -->
-<script src="../assets/js/bootstrap-notify.js"></script>
+<!-- <script src="../assets/js/bootstrap-notify.js"></script> -->
 
 <!--  Google Maps Plugin    -->
 <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
@@ -192,12 +207,51 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="../assets/js/demo.js"></script>
 
+<!-- Call GET Method API Put The Spoon -->
+<script src="../assets/js/consultas.js"></script>
+
 <script type="text/javascript">
+    
     $(document).ready(function () {
 
-        demo.initChartist();
+        Consultas.requestGet("/Notas/AverageByRegion", $_GET.consulta2Ano);
+        
+        // demo.initChartist();
+
+        var labels_regiao = [];
+        var series_regiao = [];
+        array.forEach(element => {
+            labels_regiao.push(element.regiaoIes);
+            series_regiao.push(element.nota);
+        });
+        var data = {
+            labels: labels_regiao,
+            series: series_regiao
+        };
+
+        var options = {
+            seriesBarDistance: 1,
+            axisX: {
+                showGrid: false
+            },
+            height: "245px"
+        };
+
+        var responsiveOptions = [
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 10,
+                axisX: {
+                    labelInterpolationFnc: function (value) {
+                        return value[0];
+                    }
+                }
+            }]
+        ];
+
+        Chartist.Bar('#chartActivity', data, options, responsiveOptions);
 
     });
+    
 </script>
 
 </html>

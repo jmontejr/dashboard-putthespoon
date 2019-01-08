@@ -195,7 +195,7 @@
                                         <div class="row" style="display:flex">
                                             <div class="col-md-10" style="margin-left: auto; margin-right: auto">
                                                 <div class="form-group">
-                                                    <label for="consulta2Regiao">REGIÃO</label>
+                                                    <!-- <label for="consulta2Regiao">REGIÃO</label>
                                                     <select class="form-control" name="consulta2Regiao" id="consulta2Regiao" required>
                                                         <option selected hidden disabled value="">-- SELECIONE A REGIÃO --</option>
                                                         <option value="1" id="consulta2Norte">NORTE</option>
@@ -203,12 +203,12 @@
                                                         <option value="3" id="consulta2CentroOeste">CENTRO-OESTE</option>
                                                         <option value="4" id="consulta2Sudeste">SUDESTE</option>
                                                         <option value="5" id="consulta2Sul">SUL</option>
-                                                    </select>
+                                                    </select> -->
                                                     <label for="consulta2Ano">ANO:</label>
                                                     <select class="form-control" name="consulta2Ano" id="consulta2Ano" required>
                                                         <option selected hidden disabled value="">-- SELECIONE O ANO --</option>
-                                                        <option id="consulta2Ano2014" value="1">2014</option>
-                                                        <option id="consulta2Ano2016" value="2">2016</option>
+                                                        <option id="consulta2Ano2014" value="2014">2014</option>
+                                                        <option id="consulta2Ano2016" value="2016">2016</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -443,7 +443,7 @@
             data: {},
             success: function (data) {
                 selectDinamico(data);
-                console.log("Success on call get method from putthespoon-api on url: https://putthespoon-api.herokuapp.com/api/1/Ies/getAll");
+                // console.log("Success on call get method");
             },
             error: function (e) {
                 console.log("Error: ", e);
