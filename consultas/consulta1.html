@@ -102,7 +102,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../index.html">Relação NOTA x DESPESA - <script> document.write($_GET.consulta1Ano); </script></a>
+                        <a class="navbar-brand" href="../index.html">Relação IGC x DESPESA - <script> document.write($_GET.consulta1Ano); </script></a>
                     </div>
                 </div>
             </nav>
@@ -115,7 +115,7 @@
                             <div class="card">
                                 <div class="header">
                                     <div class="col-md-8">
-                                        <h4 class="title">Relação de notas e despesas por IES</h4>
+                                        <h4 class="title">Relação de IGC e despesas por IES</h4>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="row">
@@ -204,7 +204,7 @@
         dado.forEach(element => {
             $("#body-dinamic").append($('<tr>').html(`<td>${element.nome_ies}</td>
                                                     <td>${element.igcContinuo}</td>
-                                                    <td>${"R$ "+element.DespesaTotal}</td>`));
+                                                    <td>${"R$ "+  element.DespesaTotal}</td>`));
         });
     }
 
