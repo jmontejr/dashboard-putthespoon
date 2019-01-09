@@ -234,111 +234,95 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="../assets/js/demo.js"></script>
 
+<!-- Call GET Method API Put The Spoon -->
+<script src="../assets/js/consultas.js"></script>
+
 <script type="text/javascript">
+    
     $(document).ready(function () {
 
-        // Consultas.requestGet("/Notas/AverageByRegion", $_GET.consulta2Ano);
+        Consultas.requestGet("criarGrafico", "/Despesa/ExpensesByRegions", $_GET.consulta3Ano);
 
-        $.ajax({
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': 'true'
-            },
-            type: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            crossDomain: true,
-            url: "https://putthespoon-api.herokuapp.com/api/1/Despesa/ExpensesByRegions/" + $_GET.consulta3Ano,
-            success: function (data) {
-                criarGrafico(data);
-            },
-            error: function (e) {
-                console.log("Error: ", e);
+    });
+    
+    function criarGrafico(dados) {
+
+        var labels_regiao_despesa = [];
+        var series_regiao_despesa = [];
+        var graphic_value = [];
+
+
+        var valor_escala = 100000;
+
+
+        dados.forEach(element => {
+            labels_regiao_despesa.push(element.regiaoIes);
+            series_regiao_despesa.push(element.despesa);
+        });
+
+        dados.forEach(element => {
+            graphic_value.push(element.despesa / valor_escala);
+        });
+
+        console.log(graphic_value);
+        var min = Math.min.apply(Math, series_regiao_despesa);
+        var max = Math.max.apply(Math, series_regiao_despesa);
+        var label_max;
+        var label_min;
+
+        dados.forEach(elem => {
+            if (elem.despesa == max) {
+                label_max = elem.regiaoIes;
+            }
+            if (elem.despesa == min) {
+                label_min = elem.regiaoIes;
             }
         });
 
-        function criarGrafico(dados) {
-
-            var labels_regiao_despesa = [];
-            var series_regiao_despesa = [];
-            var graphic_value = [];
+        $("#maiorLabelDespesa").html(label_max);
+        $("#menorLabelDespesa").html(label_min);
 
 
-            var valor_escala = 100000;
+        //Duas casas decimais (porem arredonda pra cima)
+        /* $("#maiorvalor").html(parseFloat(max.toFixed(2)));
+        $("#menorvalor").html(parseFloat(min.toFixed(2))); */
 
+        // Nao arredonda
+        $("#maiorValorDespesa").html(max);
+        $("#menorValorDespesa").html(min);
 
-            dados.forEach(element => {
-                labels_regiao_despesa.push(element.regiaoIes);
-                series_regiao_despesa.push(element.despesa);
-
-
-            });
-
-            dados.forEach(element => {
-                graphic_value.push(element.despesa / valor_escala);
-
-            });
-
-            console.log(graphic_value);
-            var min = Math.min.apply(Math, series_regiao_despesa);
-            var max = Math.max.apply(Math, series_regiao_despesa);
-            var label_max;
-            var label_min;
-
-            dados.forEach(elem => {
-                if (elem.despesa == max) {
-                    label_max = elem.regiaoIes;
-                }
-                if (elem.despesa == min) {
-                    label_min = elem.regiaoIes;
-                }
-            });
-
-            $("#maiorLabelDespesa").html(label_max);
-            $("#menorLabelDespesa").html(label_min);
-
-
-            //Duas casas decimais (porem arredonda pra cima)
-            /* $("#maiorvalor").html(parseFloat(max.toFixed(2)));
-            $("#menorvalor").html(parseFloat(min.toFixed(2))); */
-
-            // Nao arredonda
-            $("#maiorValorDespesa").html(max);
-            $("#menorValorDespesa").html(min);
-
-            var data = {
-                labels: labels_regiao_despesa,
-                series: [graphic_value]
-            };
-            var options = {
-                seriesBarDistance: 1,
-                axisX: {
-                    showGrid: false
-                },
-                height: "245px"
-            };
-
-            var responsiveOptions = [
-                ['screen and (max-width: 640px)', {
-                    seriesBarDistance: 2,
-                    axisX: {
-                        labelInterpolationFnc: function (value) {
-                            return value[0];
-                        }
-                    }
-                }]
-            ];
-
-            Chartist.Line('#chartActivity', data, options, responsiveOptions);
+        var data = {
+            labels: labels_regiao_despesa,
+            series: [graphic_value]
+        };
+        var options = {
+            seriesBarDistance: 1,
+            axisX: {
+                showGrid: false
+            },
+            height: "245px"
         };
 
-        function procurarporChave(obj, value) {
-            return Object.keys(obj).filter(function (key) {
-                return obj[key] == value;
-            })
-        }
+        var responsiveOptions = [
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 2,
+                axisX: {
+                    labelInterpolationFnc: function (value) {
+                        return value[0];
+                    }
+                }
+            }]
+        ];
 
-    });
+        Chartist.Line('#chartActivity', data, options, responsiveOptions);
+    };
+
+    function procurarporChave(obj, value) {
+        return Object.keys(obj).filter(function (key) {
+            return obj[key] == value;
+        })
+    };
+
 </script>
 
 </html>

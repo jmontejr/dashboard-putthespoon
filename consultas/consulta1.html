@@ -102,7 +102,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../index.html">Relação NOTA x DESPESA</a>
+                        <a class="navbar-brand" href="../index.html">Relação NOTA x DESPESA - <script> document.write($_GET.consulta1Ano); </script></a>
                     </div>
                 </div>
             </nav>
@@ -118,15 +118,13 @@
                                         <h4 class="title">Relação de notas e despesas por IES</h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="search" class="form-control input-search" placeholder="Digite o que você procura aqui"  alt="pesquisa-dinamica">
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="search" class="form-control input-search" placeholder="Digite o que você procura aqui"  alt="pesquisa-dinamica">
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="content table-responsive">
@@ -191,41 +189,25 @@
 
 <!-- Call GET Method API Put The Spoon -->
 <script src="../assets/js/consultas.js"></script>
+
 <!--  Search Table Dinamic -->
-<script src="assets/js/searchTable.js"></script>
+<script src="../assets/js/searchTable.js"></script>
 
 <script>
     $(document).ready(function() {
 
-        $.ajax({
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': 'true'
-            },
-            type: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            crossDomain: true,
-            url: "https://putthespoon-api.herokuapp.com/api/1/Ies/RelationshipExpensesAndRatings/" + $_GET.consulta1Ano,
-            data: {},
-            success: function (data) {
-                tableDinamica(data);
-                // console.log("Success on call get method");
-            },
-            error: function (e) {
-                console.log("Error: ", e);
-            }
-        });
-
-        function tableDinamica(dado) {
-            dado.forEach(element => {
-                $("#body-dinamic").append($('<tr>').html(`<td>${element.nome_ies}</td>
-                                                        <td>${element.igcContinuo}</td>
-                                                        <td>${"R$"+element.DespesaTotal}</td>`));
-            });
-        }
-
+        Consultas.requestGet("tableDinamica", "/Ies/RelationshipExpensesAndRatings", $_GET.consulta1Ano);
+    
     });
+
+    function tableDinamica(dado) {
+        dado.forEach(element => {
+            $("#body-dinamic").append($('<tr>').html(`<td>${element.nome_ies}</td>
+                                                    <td>${element.igcContinuo}</td>
+                                                    <td>${"R$ "+element.DespesaTotal}</td>`));
+        });
+    }
+
 </script>
 
 </html>

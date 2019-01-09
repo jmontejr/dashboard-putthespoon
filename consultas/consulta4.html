@@ -31,6 +31,16 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+    <script>
+    
+        var parts = window.location.search.substr(1).split("&");
+        var $_GET = {};
+        for (var i = 0; i < parts.length; i++) {
+            var temp = parts[i].split("=");
+            $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+        }
+
+    </script>
 </head>
 
 <body>
@@ -92,66 +102,57 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../index.html">Painel</a>
+                        <a class="navbar-brand" href="../index.html">
+                            <script> 
+                                if($_GET.consulta4Gasto == 1){document.write('IES QUE POSSUEM GASTOS SUPERIORES AO ORÇAMENTO - '.$_GET.consulta4Ano)} 
+                                else{document.write(`IES QUE POSSUEM GASTOS INFERIORES AO ORÇAMENTO - ${$_GET.consulta4Ano}`)};
+                            </script>
+                        </a>
                     </div>
                 </div>
             </nav>
 
 
             <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-
-                                <div class="header">
-                                    <h4 class="title">Email Statistics</h4>
-                                    <p class="category">Last Campaign Performance</p>
-                                </div>
-                                <div class="content">
-                                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Open
-                                            <i class="fa fa-circle text-danger"></i> Bounce
-                                            <i class="fa fa-circle text-warning"></i> Unsubscribe
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <div class="col-md-8">
+                                            <h4 class="title">Relação de Orçamento e Despesas por IES</h4>
                                         </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="search" class="form-control input-search" placeholder="Digite o que você procura aqui"  alt="pesquisa-dinamica">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="content table-responsive">
+                                        <table class="table table-hover table-bordered pesquisa-dinamica">
+                                            <thead>
+                                                <th>Nome</th>
+                                                <th>Orçamento Total</th>
+                                                <th>Despesa Total</th>
+                                                <th>Diferença</th>
+                                            </thead>
+                                            <tbody id="body-dinamic">
+                                                
+                                            </tbody>
+                                        </table>
+        
+                                    </div>  
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Users Behavior</h4>
-                                    <p class="category">24 Hours performance</p>
-                                </div>
-                                <div class="content">
-                                    <div id="chartActivity" class="ct-chart"></div>
-                                    <div class="footer">
-                                        <div class="legend">
-                                            <i class="fa fa-circle text-info"></i> Open
-                                            <i class="fa fa-circle text-danger"></i> Click
-                                            <i class="fa fa-circle text-warning"></i> Click Second Time
-                                        </div>
-                                        <hr>
-                                        <div class="stats">
-                                            <i class="fa fa-history"></i> Updated 3 minutes ago
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    
+                        </div>  
+    
                     </div>
-
                 </div>
-            </div>
 
             <footer class="footer">
                 <div class="container-fluid">
@@ -192,12 +193,29 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="../assets/js/demo.js"></script>
 
+<!-- Call GET Method API Put The Spoon -->
+<script src="../assets/js/consultas.js"></script>
+
+<!--  Search Table Dinamic -->
+<script src="../assets/js/searchTable.js"></script>
+
 <script type="text/javascript">
+    
     $(document).ready(function () {
 
-        demo.initChartist();
+        Consultas.requestGet("tableDinamica", "/Orcamento/ExpenseAndBudget", $_GET.consulta4Ano, $GET.consulta4Gasto);
 
     });
+
+    function tableDinamica(dado) {
+        dado.forEach(element => {
+            $("#body-dinamic").append($('<tr>').html(`<td>${element.nome_ies}</td>
+                                                    <td>${"R$" + element.orcamento}</td>
+                                                    <td>${"R$ " + element.despesa}</td>
+                                                    <td>${"R$ " + (element.orcamento - element.despesa)}</td>`));
+        });
+    }
+
 </script>
 
 </html>

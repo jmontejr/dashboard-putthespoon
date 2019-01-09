@@ -19,7 +19,7 @@ Consultas = {
         return url_complete;
     },
     
-    requestGet: function (url, arg1=null, arg2=null, arg3=null) {
+    requestGet: function (funcao, url, arg1=null, arg2=null, arg3=null) {
 
         $.ajax({
             headers: {
@@ -32,7 +32,7 @@ Consultas = {
             crossDomain: true,
             url: Consultas.getUrl(url, arg1, arg2, arg3),
             success: function (data) {
-                console.log(data);
+                window[funcao](data);
             },
             error: function (e) {
                 console.log("Error: ", e);
