@@ -103,7 +103,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../index.html"><script>document.write($_GET.consulta5TipoDespesa ," - ",$_GET.consulta5Ano)  </script></a>
+                        <a class="navbar-brand" href="../index.html"><span class="title-despesa"></span> - <script> document.write($_GET.consulta5Ano) </script></a>
                     </div>
                 </div>
             </nav>
@@ -116,16 +116,16 @@
                             <div class="card">
 
                                 <div class="header">
-                                    <h4 class="title">Menor gasto com <script>document.write($_GET.consulta5TipoDespesa )  </script></h4>
-                                    <p class="category">IES com menores gastos com <script>document.write($_GET.consulta5TipoDespesa )  </script></p>
+                                    <h4 class="title">Menor gasto com <span class="title-despesa"></span></h4>
+                                    <p class="category">IES com menores gastos com <span class="title-despesa"></span></p>
                                 </div>
                                 <div class="content">
                                        
                                     <div class="lead">
-                                        <p><strong>IES: </strong><span id="menorLabelTipo"></span></p>
+                                        <p><strong>IES: </strong><span id="ascLabelTipo"></span></p>
                                     </div>
                                     <div class="lead">
-                                        <p><strong>Valor: </strong><span id="menorValorTipo"></span></p>
+                                        <p><strong>Valor: </strong><span id="ascValorTipo"></span></p>
                                     </div>
 
                                 </div>
@@ -136,16 +136,16 @@
                             <div class="card">
 
                                 <div class="header">
-                                    <h4 class="title">Maior gasto com <script>document.write($_GET.consulta5TipoDespesa )  </script></h4>
-                                    <p class="category">IES com maiores gastos com <script>document.write($_GET.consulta5TipoDespesa )  </script></p>
+                                    <h4 class="title">Maior gasto com <span class="title-despesa"></span></h4>
+                                    <p class="category">IES com maiores gastos com <span class="title-despesa"></span></p>
                                 </div>
                                 <div class="content">
 
                                     <div class="lead">
-                                        <p><strong>IES: </strong><span id="maiorLabelTipo"></span></p>
+                                        <p><strong>IES: </strong><span id="descLabelTipo"></span></p>
                                     </div>
                                     <div class="lead">
-                                        <p><strong>Valor: </strong><span id="maiorValorTipo"></span></p>
+                                        <p><strong>Valor: </strong><span id="descValorTipo"></span></p>
                                     </div>
 
                                 </div>
@@ -155,7 +155,8 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Valores das despesas em <script> document.write($_GET.consulta5Ano)</script></h4>
@@ -165,11 +166,28 @@
                                 </div>
                                 <div class="content">
 
-                                    <div id="chartActivity" class="ct-chart"></div>
+                                    <div id="chartActivity_asc" class="ct-chart"></div>
 
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Valores das despesas em <script> document.write($_GET.consulta5Ano)</script></h4>
+                                    <p class="category">
+                                        Gráfico com comparativo dos valores de cada tipo das despesas.
+                                    </p>
+                                </div>
+                                <div class="content">
+
+                                    <div id="chartActivity_desc" class="ct-chart"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -217,72 +235,67 @@
     
     $(document).ready(function () {
 
-        // Consultas.requestGet("/Notas/AverageByRegion", $_GET.consulta2Ano);
+        var base_url = "https://putthespoon-api.herokuapp.com/api/1/Ies/ExpenseByType/" + $_GET.consulta5Ano + "/" + $_GET.consulta5TipoDespesa;
 
-        $.ajax({
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': 'true'
-            },
-            type: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            crossDomain: true,
-            url: "https://putthespoon-api.herokuapp.com/api/1/Ies/ExpenseByType/"+ $_GET.consulta5Ano +"/1/asc",
-            
-            success: function (data) {
-                criarGrafico(data);
-            },
-            error: function (e) {
-                console.log("Error: ", e);
-            }
-        });
+        function chamadaAPI(url_, order){
+            $.ajax({
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Credentials': 'true'
+                },
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                crossDomain: true,
+                url: url_ + order,
+                
+                success: function (data) {
+                    criarGrafico(data, order);
+                },
+                error: function (e) {
+                    console.log("Error: ", e);
+                }
+            });
+        }
 
-        function  criarGrafico(dados){
+        function  criarGrafico(dados, order){
             
             var labels_nome = [];
             var series_valores = [];
 
             dados.forEach(element => {
 
-                
-                labels_nome.push(element.nome_ies);
-                series_valores.push(element.despesa);
-                
+                labels_nome.push(element.sigla_ies);
+                series_valores.push(element.despesa_total);
                 
             });
-            
-            var min = Math.min.apply(Math, series_valores);
-            var max = Math.max.apply(Math, series_valores);
-            var label_max;
-            var label_min;
-            
 
+            $(".title-despesa").html(dados[0].tipo_despesa);
+
+            var valor = 0;
+            switch (order) {
+                case 'asc':
+                    valor = Math.min.apply(Math, series_valores);
+                    break;
+                case 'desc':
+                    valor = Math.max.apply(Math, series_valores);
+                    break;
+            }
+
+            var label_ies;
+            
             dados.forEach(elem => {
-                if (elem.despesa == max) {
-                    label_max = elem.nome_ies;
-            
-                    
-                    
-                }
-                if (elem.despesa == min) {
-                    label_min = elem.nome_ies;
-                   
+                if (elem.despesa_total == valor) {
+                    label_ies = elem.nome_ies;
                 }
             });
 
-            console.log(label_max)
-
-            $("#maiorLabelTipo").html(label_max);
-            $("#menorLabelTipo").html(label_min);
-            //Duas casas decimais (porem arredonda pra cima)
-            /* $("#maiorvalor").html(parseFloat(max.toFixed(2)));
-            $("#menorvalor").html(parseFloat(min.toFixed(2))); */
-
-            // Nao arredonda
-            $("#maiorValorTipo").html(max);
-            $("#menorValorTipo").html(min);
+            $("#" + order + "LabelTipo").html(label_ies);
+            $("#" + order + "ValorTipo").html(valor);
             
+            labels_nome = labels_nome.slice(0,20);
+            series_valores = series_valores.slice(0,20);
+
             var data = {
                 labels: labels_nome,
                 series: [series_valores]
@@ -307,14 +320,11 @@
                 }]
             ];
 
-            Chartist.Line('#chartActivity', data, options, responsiveOptions);
+            Chartist.Bar('#chartActivity_' + order, data, options, responsiveOptions);
         };
-
-        function procurarporChave(obj, value) {
-            return Object.keys(obj).filter(function (key) {
-                return obj[key] == value;
-            })
-        }
+                
+        chamadaAPI(base_url, "/asc");
+        chamadaAPI(base_url, "/desc");
 
     });
     
