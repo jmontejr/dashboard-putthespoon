@@ -283,7 +283,7 @@
 
         var labels_nome = [];
         var series_valores = [];
-        var byDespesa = dados.slice(0);
+        /* var byDespesa = dados.slice(0);
 
         switch (order) {
             case 'asc':
@@ -303,9 +303,16 @@
             labels_nome.push(element.sigla_ies);
             series_valores.push(element.despesa_total);
 
+        }); */
+
+        dados.forEach(element => {
+
+            labels_nome.push(element.sigla_ies);
+            series_valores.push(element.despesa_total);
+
         });
 
-        $(".title-despesa").html(byDespesa[0].tipo_despesa);
+        $(".title-despesa").html(dados[0].tipo_despesa);
 
         var valor = 0;
         switch (order) {
@@ -319,7 +326,7 @@
 
         var label_ies;
 
-        byDespesa.forEach(elem => {
+        dados.forEach(elem => {
             if (elem.despesa_total == valor) {
                 label_ies = elem.nome_ies;
             }
