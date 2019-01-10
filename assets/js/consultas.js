@@ -32,7 +32,7 @@ Consultas = {
             crossDomain: true,
             url: Consultas.getUrl(url, arg1, arg2, arg3),
             success: function (data) {
-                window[funcao](data);
+                window[funcao](data, arg3);
             },
             error: function (e) {
                 console.log("Error: ", e);
