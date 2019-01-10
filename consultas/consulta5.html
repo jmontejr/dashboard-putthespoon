@@ -247,7 +247,7 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 crossDomain: true,
-                url: url_ + order,
+                url: url_ + "/" + order,
                 
                 success: function (data) {
                     criarGrafico(data, order);
@@ -257,76 +257,76 @@
                 }
             });
         }
-
-        function  criarGrafico(dados, order){
-            
-            var labels_nome = [];
-            var series_valores = [];
-
-            dados.forEach(element => {
-
-                labels_nome.push(element.sigla_ies);
-                series_valores.push(element.despesa_total);
                 
-            });
-
-            $(".title-despesa").html(dados[0].tipo_despesa);
-
-            var valor = 0;
-            switch (order) {
-                case 'asc':
-                    valor = Math.min.apply(Math, series_valores);
-                    break;
-                case 'desc':
-                    valor = Math.max.apply(Math, series_valores);
-                    break;
-            }
-
-            var label_ies;
-            
-            dados.forEach(elem => {
-                if (elem.despesa_total == valor) {
-                    label_ies = elem.nome_ies;
-                }
-            });
-
-            $("#" + order + "LabelTipo").html(label_ies);
-            $("#" + order + "ValorTipo").html(valor);
-            
-            labels_nome = labels_nome.slice(0,20);
-            series_valores = series_valores.slice(0,20);
-
-            var data = {
-                labels: labels_nome,
-                series: [series_valores]
-            };
-
-            var options = {
-                seriesBarDistance: 1,
-                axisX: {
-                    showGrid: false
-                },
-                height: "245px"
-            };
-
-            var responsiveOptions = [
-                ['screen and (max-width: 640px)', {
-                    seriesBarDistance: 10,
-                    axisX: {
-                        labelInterpolationFnc: function (value) {
-                            return value[0];
-                        }
-                    }
-                }]
-            ];
-
-            Chartist.Bar('#chartActivity_' + order, data, options, responsiveOptions);
-        };
-                
-        chamadaAPI(base_url, "/asc");
-        chamadaAPI(base_url, "/desc");
+        chamadaAPI(base_url, "asc");
+        chamadaAPI(base_url, "desc");
 
     });
+
+    function criarGrafico(dados, order) {
+
+        var labels_nome = [];
+        var series_valores = [];
+
+        dados.forEach(element => {
+
+            labels_nome.push(element.sigla_ies);
+            series_valores.push(element.despesa_total);
+
+        });
+
+        $(".title-despesa").html(dados[0].tipo_despesa);
+
+        var valor = 0;
+        switch (order) {
+            case 'asc':
+                valor = Math.min.apply(Math, series_valores);
+                break;
+            case 'desc':
+                valor = Math.max.apply(Math, series_valores);
+                break;
+        }
+
+        var label_ies;
+
+        dados.forEach(elem => {
+            if (elem.despesa_total == valor) {
+                label_ies = elem.nome_ies;
+            }
+        });
+
+        $("#" + order + "LabelTipo").html(label_ies);
+        $("#" + order + "ValorTipo").html(valor);
+
+        /* labels_nome = labels_nome.slice(0,10);
+        series_valores = series_valores.slice(0,10); */
+
+        var data = {
+            labels: labels_nome.slice(0, 10),
+            series: [series_valores.slice(0, 10)]
+        };
+
+        var options = {
+            seriesBarDistance: 1,
+            axisX: {
+                showGrid: false
+            },
+            height: "245px"
+        };
+
+        var responsiveOptions = [
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 10,
+                axisX: {
+                    labelInterpolationFnc: function (value) {
+                        return value[0];
+                    }
+                }
+            }]
+        ];
+
+        Chartist.Bar(('#chartActivity_' + order), data, options, responsiveOptions);
+    };
     
 </script>
 

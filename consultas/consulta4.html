@@ -114,45 +114,45 @@
 
 
             <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="header">
-                                        <div class="col-md-8">
-                                            <h4 class="title">Relação de Orçamento e Despesas por IES</h4>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="search" class="form-control input-search" placeholder="Digite o que você procura aqui"  alt="pesquisa-dinamica">
-                                                    </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <div class="col-md-8">
+                                        <h4 class="title">Relação de Orçamento e Despesas por IES</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="search" class="form-control input-search" placeholder="Digite o que você procura aqui"  alt="pesquisa-dinamica">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="content table-responsive">
-                                        <table class="table table-hover table-bordered pesquisa-dinamica">
-                                            <thead>
-                                                <th>Nome</th>
-                                                <th>Orçamento Total</th>
-                                                <th>Despesa Total</th>
-                                                <th>Diferença</th>
-                                            </thead>
-                                            <tbody id="body-dinamic">
-                                                
-                                            </tbody>
-                                        </table>
-        
-                                    </div>  
                                 </div>
+                                <div class="content table-responsive">
+                                    <table class="table table-hover table-bordered pesquisa-dinamica">
+                                        <thead>
+                                            <th>Nome</th>
+                                            <th>Orçamento Total</th>
+                                            <th>Despesa Total</th>
+                                            <th>Diferença</th>
+                                        </thead>
+                                        <tbody id="body-dinamic">
+                                            
+                                        </tbody>
+                                    </table>
+    
+                                </div>  
                             </div>
-    
-                        </div>  
-    
-                    </div>
+                        </div>
+
+                    </div>  
+
                 </div>
+            </div>
 
             <footer class="footer">
                 <div class="container-fluid">
@@ -203,7 +203,7 @@
     
     $(document).ready(function () {
 
-        Consultas.requestGet("tableDinamica", "/Orcamento/ExpenseAndBudget", $_GET.consulta4Ano, $GET.consulta4Gasto);
+        Consultas.requestGet("tableDinamica", "/Orcamento/ExpenseAndBudget", $_GET.consulta4Ano, $_GET.consulta4Gasto);
 
     });
 
@@ -212,10 +212,18 @@
             $("#body-dinamic").append($('<tr>').html(`<td>${element.nome_ies}</td>
                                                     <td>${"R$" + element.orcamento}</td>
                                                     <td>${"R$ " + element.despesa}</td>
-                                                    <td>${"R$ " + (element.orcamento - element.despesa)}</td>`));
+                                                    <td>${"R$ " + (changeNumber(element.orcamento) - changeNumber(element.despesa))}</td>`));
         });
     }
 
+    function changeNumber(argumento){
+        if(typeof argumento == 'number'){
+            return argumento;
+        }
+        else{
+            return parseFloat(argumento);
+        }
+    }
 </script>
 
 </html>
