@@ -1,4 +1,4 @@
-# Dashboard Put The Spoon
+# [Dashboard Put The Spoon](https://jmontejr.github.io/dashboard-putthespoon/)
 [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
 
 <img src="https://github.com/jmontejr/dashboard-putthespoon/blob/master/assets/img/logo_putthespoon.png" width="500">
@@ -9,6 +9,7 @@ O Put The Spoon é um projeto de cunho social desenvolvido para a disciplina Pro
 
 ## Links:
 
++ [Dashboard Online Put The Spoon](https://jmontejr.github.io/dashboard-putthespoon/)
 + [Put The Spoon - Flask API Rest](https://github.com/ProjetosDeBD-2018-2/put-the-spoon)
 
 ### O que está incluso:
@@ -45,5 +46,5 @@ x_lbd_free/
 
 [CHANGELOG]: ./CHANGELOG.md
 [LICENSE]: ./LICENSE.md
-[version-badge]: https://img.shields.io/badge/version-1.4.0-blue.svg
+[version-badge]: https://img.shields.io/badge/version-1.0.0-blue.svg
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
