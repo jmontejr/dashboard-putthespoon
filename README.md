@@ -1,7 +1,7 @@
 # Dashboard Put The Spoon
 [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
 
-![alt text](https://github.com/jmontejr/dashboard-putthespoon/blob/master/assets/img/logo_putthespoon.png "Put The Spoon Logo")
+<img src="https://github.com/jmontejr/dashboard-putthespoon/blob/master/assets/img/logo_putthespoon.png" width="500">
 
 O Dashboard Put The Spoon é uma plataforma para consultas sobre as Despesas e Orçamentos das Instituições de Ensino Superior (IES) Públicas Federais. 
 
@@ -11,9 +11,9 @@ O Put The Spoon é um projeto de cunho social desenvolvido para a disciplina Pro
 
 + [Put The Spoon - Flask API Rest](https://github.com/ProjetosDeBD-2018-2/put-the-spoon)
 
-### What's included
+### O que está incluso:
 
-Within the download you'll find the following directories and files:
+Ao clonar ou baixar o este projeto, você o encontrará com a seguinte estrutura:
 
 ```
 x_lbd_free/
@@ -29,10 +29,10 @@ x_lbd_free/
 |   ├── consulta3.html
 |   ├── consulta4.html
 |   └── consulta5.html
-├── index.html
 ├── CHANGELOG.md
 ├── LICENSE.md
 ├── README.md
+├── index.html
 ├── glossario.html
 └── quem-somos.html
 ```
