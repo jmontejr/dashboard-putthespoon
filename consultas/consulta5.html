@@ -122,10 +122,10 @@
                                 <div class="content">
                                        
                                     <div class="lead">
-                                        <p><strong>IES: </strong><span id="ascLabelTipo"></span></p>
+                                        <p><strong>IES: </strong>R$ <span id="ascLabelTipo"></span></p>
                                     </div>
                                     <div class="lead">
-                                        <p><strong>Valor: </strong><span id="ascValorTipo"></span></p>
+                                        <p><strong>Valor: </strong>R$ <span id="ascValorTipo"></span></p>
                                     </div>
 
                                 </div>
@@ -142,10 +142,10 @@
                                 <div class="content">
 
                                     <div class="lead">
-                                        <p><strong>IES: </strong><span id="descLabelTipo"></span></p>
+                                        <p><strong>IES: </strong>R$ <span id="descLabelTipo"></span></p>
                                     </div>
                                     <div class="lead">
-                                        <p><strong>Valor: </strong><span id="descValorTipo"></span></p>
+                                        <p><strong>Valor: </strong>R$ <span id="descValorTipo"></span></p>
                                     </div>
 
                                 </div>
@@ -156,33 +156,49 @@
 
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Valores das despesas em <script> document.write($_GET.consulta5Ano)</script></h4>
+                                    <h4 class="title">Menores despesas em <span class="title-despesa"></span></h4>
                                     <p class="category">
-                                        Gráfico com comparativo dos valores de cada tipo das despesas.
+                                        15 IES menores despesas com <span class="title-despesa"></span> no ano <script> document.write($_GET.consulta5Ano)</script>.
                                     </p>
                                 </div>
                                 <div class="content">
 
                                     <div id="chartActivity_asc" class="ct-chart"></div>
 
+                                    <div class="footer">
+                                        <div class="stats">
+                                            ¹A escala do gráfico é de 100.000 reais
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Valores das despesas em <script> document.write($_GET.consulta5Ano)</script></h4>
+                                    <h4 class="title">Maiores despesas em <span class="title-despesa"></span></h4>
                                     <p class="category">
-                                        Gráfico com comparativo dos valores de cada tipo das despesas.
+                                        15 IES maiores despesas com <span class="title-despesa"></span> no ano <script> document.write($_GET.consulta5Ano)</script>.
                                     </p>
                                 </div>
                                 <div class="content">
 
                                     <div id="chartActivity_desc" class="ct-chart"></div>
+
+                                    <div class="footer">
+                                        <div class="stats">
+                                            ¹A escala do gráfico é de 100.000 reais
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -267,15 +283,29 @@
 
         var labels_nome = [];
         var series_valores = [];
+        var byDespesa = dados.slice(0);
 
-        dados.forEach(element => {
+        switch (order) {
+            case 'asc':
+                byDespesa = byDespesa.sort(function (a, b) {
+                    return a.despesa_total - b.despesa_total;
+                });
+                break;
+            case 'desc':
+                byDespesa = byDespesa.sort(function (b, a) {
+                    return a.despesa_total - b.despesa_total;
+                });
+                break;
+        }
+
+        byDespesa.forEach(element => {
 
             labels_nome.push(element.sigla_ies);
             series_valores.push(element.despesa_total);
 
         });
 
-        $(".title-despesa").html(dados[0].tipo_despesa);
+        $(".title-despesa").html(byDespesa[0].tipo_despesa);
 
         var valor = 0;
         switch (order) {
@@ -289,7 +319,7 @@
 
         var label_ies;
 
-        dados.forEach(elem => {
+        byDespesa.forEach(elem => {
             if (elem.despesa_total == valor) {
                 label_ies = elem.nome_ies;
             }
@@ -298,12 +328,19 @@
         $("#" + order + "LabelTipo").html(label_ies);
         $("#" + order + "ValorTipo").html(valor);
 
-        /* labels_nome = labels_nome.slice(0,10);
-        series_valores = series_valores.slice(0,10); */
+        labels_nome = labels_nome.slice(0, 15);
+        series_valores = series_valores.slice(0, 15);
+
+        var graphic_values = [];
+        var escala = 100000;
+
+        series_valores.forEach(element => {
+            graphic_values.push(element / escala);
+        });
 
         var data = {
-            labels: labels_nome.slice(0, 10),
-            series: [series_valores.slice(0, 10)]
+            labels: labels_nome,
+            series: [graphic_values]
         };
 
         var options = {
